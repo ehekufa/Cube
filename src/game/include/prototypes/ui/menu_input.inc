@@ -19,6 +19,7 @@ static void open_online(void);
 static void open_leaderboard(void);
 static void touch_lobby(double x, double y, double action);
 static void touch_modes(double x, double y);
+static void touch_tutorial(double x, double y, double action);
 static void touch_settings(double x, double y);
 static void touch_classes(double x, double y, double action);
 static void touch_levels(double x, double y, double action);

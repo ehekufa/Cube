@@ -65,6 +65,7 @@ static void draw_remote_snow(void) {
 
 static void finish_game(double result) {
     finished = result;
+    battle_menu_state = 0;
     aim_id = -1;
     super_id = -1;
     punch->active = 0;
@@ -263,7 +264,7 @@ static void draw_controls(void) {
         }
         text_in_box(sl, atk2_x - 70, atk2_y - 70, 140, 140, 0xFFFFFF, sls);
     }
-    draw_back();
+    draw_battle_menu_button();
 }
 
 static void draw_result(const char *title) {
@@ -346,4 +347,5 @@ static void draw_game(void) {
         draw_result(tr_defeat());
     }
     draw_card_open();
+    draw_battle_menu_overlay();
 }

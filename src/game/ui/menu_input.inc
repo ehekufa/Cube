@@ -238,7 +238,7 @@ static void touch_lobby(double x, double y, double action) {
 }
 
 static void touch_modes(double x, double y) {
-    if (hit_modes_row(x, y, 5) == 1) {
+    if (hit_modes_row(x, y, 6) == 1) {
         winter_theme = 1 - winter_theme;
         apply_winter_theme();
         save_settings();
@@ -262,6 +262,10 @@ static void touch_modes(double x, double y) {
     }
     if (hit_modes_row(x, y, 4) == 1) {
         start_transition(ST_PROMO);
+        return;
+    }
+    if (hit_modes_row(x, y, 5) == 1) {
+        start_transition(ST_TUTORIAL);
     }
 }
 

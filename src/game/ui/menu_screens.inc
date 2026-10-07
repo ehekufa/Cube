@@ -55,12 +55,14 @@ static void draw_lobby(void) {
 
 static void draw_modes(void) {
     screen_fill();
-    button(tr_back(), menu_x(), modes_row(0), btn_w, btn_h);
-    button(tr_solo(), menu_x(), modes_row(1), btn_w, btn_h);
-    button(tr_online(), menu_x(), modes_row(2), btn_w, btn_h);
-    button(tr_top(), menu_x(), modes_row(3), btn_w, btn_h);
-    button(tr_promo(), menu_x(), modes_row(4), btn_w, btn_h);
-    button_scaled(tr_winter_toggle(), menu_x(), modes_row(5), btn_w, btn_h, 0.8);
+    double h = modes_btn_h();
+    button(tr_back(), menu_x(), modes_row(0), btn_w, h);
+    button(tr_solo(), menu_x(), modes_row(1), btn_w, h);
+    button(tr_online(), menu_x(), modes_row(2), btn_w, h);
+    button(tr_top(), menu_x(), modes_row(3), btn_w, h);
+    button(tr_promo(), menu_x(), modes_row(4), btn_w, h);
+    button(tr_how_to_play(), menu_x(), modes_row(5), btn_w, h);
+    button_scaled(tr_winter_toggle(), menu_x(), modes_row(6), btn_w, h, 0.8);
 }
 
 static void draw_settings(void) {

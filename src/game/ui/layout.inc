@@ -230,12 +230,35 @@ static double hit_login_btn(double px, double py) {
     return hit_rect_pad(px, py, login_btn_x(), login_btn_y(), login_btn_w, btn_h);
 }
 
-static double modes_top(void) { return screen_h / 2 - (modes_rows * btn_h + (modes_rows - 1) * btn_gap) / 2; }
+static double modes_gap(void) {
+    double fit = (screen_h - 16 - (modes_rows - 1) * btn_gap) / modes_rows;
+    return fit < 44 ? 4 : btn_gap;
+}
 
-static double modes_row(double i) { return modes_top() + i * menu_stride(); }
+static double modes_btn_h(void) {
+    double gap = modes_gap();
+    double h = (screen_h - 16 - (modes_rows - 1) * gap) / modes_rows;
+    if (h > btn_h) {
+        h = btn_h;
+    }
+    return h < 24 ? 24 : h;
+}
+
+static double modes_stride(void) { return modes_btn_h() + modes_gap(); }
+
+static double modes_top(void) {
+    return (screen_h - (modes_btn_h() + (modes_rows - 1) * modes_stride())) / 2;
+}
+
+static double modes_row(double i) { return modes_top() + i * modes_stride(); }
 
 static double hit_modes_row(double px, double py, double i) {
-    return hit_rect_pad(px, py, menu_x(), modes_row(i), btn_w, btn_h);
+    double pad_y = modes_gap() / 2;
+    if (pad_y > touch_pad_y) {
+        pad_y = touch_pad_y;
+    }
+    return hit_rect(px, py, menu_x() - touch_pad_x, modes_row(i) - pad_y, btn_w + 2 * touch_pad_x,
+                    modes_btn_h() + 2 * pad_y);
 }
 
 static double quest_w(void) { return fit_w(760); }

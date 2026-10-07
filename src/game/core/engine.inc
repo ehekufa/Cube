@@ -17,6 +17,7 @@ static void leave_screen(double state) {
         event_t = 0;
     }
     if (state == ST_SOLO || state == ST_ONLINE) {
+        battle_menu_state = 0;
         save_progress();
     }
 }
@@ -274,7 +275,9 @@ static void logic_update(void) {
     tick_achievement_toast();
     tick_fps_meter();
     if (game_state == ST_SOLO) {
-        update_game();
+        if (battle_simulation_paused() == 0) {
+            update_game();
+        }
     } else if (game_state == ST_ONLINE) {
         update_online();
     } else if (game_state == ST_LOGIN) {
@@ -311,6 +314,8 @@ static void draw_screen(void) {
         draw_promo();
     } else if (game_state == ST_QUESTS) {
         draw_quests();
+    } else if (game_state == ST_TUTORIAL) {
+        draw_tutorial();
     } else if (game_state == ST_PRIVACY) {
         draw_privacy();
     } else {
@@ -352,10 +357,18 @@ static double logic_back(void) {
         return 1;
     }
     if (game_state == ST_SOLO || game_state == ST_ONLINE) {
+        if (battle_menu_state != 0) {
+            battle_menu_back();
+            return 1;
+        }
         if (finished != 0 && finish_t < alert_hold) {
             return 1;
         }
-        start_transition(ST_LOBBY);
+        battle_menu_open();
+        return 1;
+    }
+    if (game_state == ST_TUTORIAL) {
+        start_transition(ST_MODES);
         return 1;
     }
     if (game_state == ST_LEVELS || game_state == ST_SKINS) {

@@ -91,6 +91,10 @@ def check_assets() -> None:
 
 def check_port_layout() -> None:
     assert not list(ROOT.rglob("*.ds")), "В C-порте остались исходники старого языка"
+    for source in (ROOT / "src" / "game").rglob("*"):
+        if source.is_file() and source.suffix in {".c", ".h", ".inc"}:
+            contents = source.read_text(encoding="utf-8")
+            assert "ADMIN_PASS" not in contents and "ADMIN2_PASS" not in contents, source
     assert not (ROOT / "game").exists(), "Старый каталог game не должен использоваться"
     assert not (ROOT / "native").exists(), "Старый каталог native не должен использоваться"
     required = (

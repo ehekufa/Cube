@@ -12,6 +12,7 @@ double ST_SKINS;
 double ST_PROMO;
 double ST_QUESTS;
 double ST_PRIVACY;
+double ST_TUTORIAL;
 double game_state;
 double language;
 double t_dir;

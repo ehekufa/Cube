@@ -34,15 +34,8 @@ static double is_admin(void) {
     if (net_login_status() != 2) {
         return 0;
     }
-    const char *nick = net_login_nick();
-    const char *pass = net_login_pass();
-    if (str_eq(nick, ADMIN_NICK) == 1 && str_eq(pass, ADMIN_PASS) == 1) {
-        return 1;
-    }
-    if (str_eq(nick, ADMIN2_NICK) == 1 && str_eq(pass, ADMIN2_PASS) == 1) {
-        return 1;
-    }
-    return 0;
+    /* This is only a UI hint. Firebase rules remain the authority for admin writes. */
+    return admin_slot(net_login_nick()) > 0;
 }
 
 static const char *admin_actor_nick(void) {

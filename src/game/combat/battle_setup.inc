@@ -35,6 +35,7 @@ static void reset_battle(void) {
     enemy->feint = 0;
     enemy_reset_class_state();
     finished = 0;
+    battle_menu_state = 0;
     finish_t = 0;
     punch->active = 0;
     punch->hit = 0;

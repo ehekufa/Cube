@@ -1,0 +1,14 @@
+static double tutorial_grid_w(void);
+static double tutorial_gap(void);
+static double tutorial_card_w(void);
+static double tutorial_card_x(double col);
+static double tutorial_top(void);
+static double tutorial_button_h(void);
+static double tutorial_button_y(void);
+static double tutorial_card_h(void);
+static double tutorial_card_y(double row);
+static double tutorial_start_w(void);
+static double hit_tutorial_start(double x, double y);
+static void draw_tutorial_card(double col, double row, const char *title, const char *body);
+static void draw_tutorial(void);
+static void touch_tutorial(double x, double y, double action);

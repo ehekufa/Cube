@@ -247,6 +247,7 @@ static void draw_online(void) {
         draw_result(tr_defeat());
     }
     draw_banner();
+    draw_battle_menu_overlay();
 }
 
 static void drop_joy(void) {
@@ -293,6 +294,10 @@ static void joy_touch(double x, double y, double action, double id) {
 }
 
 static void touch_game(double x, double y, double action, double id) {
+    if (battle_menu_state != 0) {
+        battle_menu_touch(x, y, action);
+        return;
+    }
     if (card_open != 0) {
         if (action == 0) {
             card_close();
@@ -325,7 +330,7 @@ static void touch_game(double x, double y, double action, double id) {
         }
     }
     if (back_hit(x, y) == 1 && action == 0) {
-        start_transition(0);
+        battle_menu_open();
         return;
     }
     if (class_has_super(player_class) == 1 && (game_state == ST_SOLO || game_state == ST_ONLINE)) {

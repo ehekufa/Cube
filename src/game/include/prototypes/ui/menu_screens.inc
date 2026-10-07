@@ -4,6 +4,7 @@ static void draw_lobby_money(void);
 static void draw_lobby(void);
 static void draw_modes(void);
 static void draw_settings(void);
+static void draw_tutorial(void);
 static void draw_privacy(void);
 static void draw_card_look(double look, double x, double y, double scale);
 static void draw_class_card(double vi);
